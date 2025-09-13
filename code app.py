@@ -1,10 +1,22 @@
+import zipfile
+import os
+import pandas as pd
+
+# Unzip the file if not already unzipped
+if not os.path.exists("Medicine_Details.csv"):  # change to your dataset name inside the zip
+    with zipfile.ZipFile("archive.zip", "r") as zip_ref:
+        zip_ref.extractall(".")
+
+# Now load the dataset
+df = pd.read_csv("Medicine_Details.csv")  # or use pd.read_excel if it’s xlsx
+
 import streamlit as st
 import pandas as pd
 
 # Load dataset
 @st.cache_data
 def load_data():
-    df = pd.read_csv("medicine_details.csv")
+    df = pd.read_csv("Medicine_Details.csv")
     return df
 
 df = load_data()
