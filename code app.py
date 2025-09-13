@@ -10,6 +10,9 @@ if not os.path.exists("Medicine_Details.csv"):  # change to your dataset name in
 # Now load the dataset
 df = pd.read_csv("Medicine_Details.csv")  # or use pd.read_excel if it’s xlsx
 
+st.write("Columns in dataset:", df.columns.tolist())
+
+
 import streamlit as st
 import pandas as pd
 
@@ -29,7 +32,7 @@ st.write("Enter a medicine name to see usage, side effects, and substitutes.")
 medicine_name = st.text_input("Medicine Name:")
 
 if medicine_name:
-    result = df[df['Drug_Name'].str.contains(medicine_name, case=False, na=False)]
+    result = df[df['Medicine_Name'].str.contains(medicine_name, case=False, na=False)]
     
     if result.empty:
         st.error("⚠️ No results found. Try another medicine.")
