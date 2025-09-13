@@ -31,7 +31,7 @@ st.write("Enter a medicine name to see usage, side effects, and substitutes.")
 medicine_name = st.text_input("Medicine Name:")
 
 if medicine_name:
-    result = df[df['Medicine_Name'].str.contains(medicine_name, case=False, na=False)]
+    result = df[df['Medicine Name'].str.contains(medicine_name, case=False, na=False)]
     
     if result.empty:
         st.error("⚠️ No results found. Try another medicine.")
