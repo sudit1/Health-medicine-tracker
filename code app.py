@@ -10,7 +10,6 @@ if not os.path.exists("Medicine_Details.csv"):  # change to your dataset name in
 # Now load the dataset
 df = pd.read_csv("Medicine_Details.csv")  # or use pd.read_excel if it’s xlsx
 
-st.write("Columns in dataset:", df.columns.tolist())
 
 
 import streamlit as st
