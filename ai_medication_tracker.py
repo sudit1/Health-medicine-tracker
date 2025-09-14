@@ -55,24 +55,26 @@ def check_age_warning(age, med_name):
 
 def evaluate_medications(user_meds, age, allergies, conditions):
     results = []
+    def evaluate_medications(user_meds, age, conditions):
+    results = []
     for med in user_meds:
         match = df[df["Medicine Name"].str.lower() == med.lower()]
         if match.empty:
             results.append({ "Medicine": med, "Status": "❌ Not found" })
             continue
-
         row = match.iloc[0]
-        allergy_flag, allergen = check_allergies(row["Composition"], allergies)
         condition_match = match_condition(row["Uses"], conditions)
         age_warn = check_age_warning(age, row["Medicine Name"])
-
         results.append({
             "Medicine": row["Medicine Name"],
-            "Allergy Alert": f"Contains {allergen}" if allergy_flag else "None",
             "Matches Condition": "Yes" if condition_match else "No",
             "Age Warning": age_warn if age_warn else "None",
             "Side Effects": row["Side_effects"][:200] + "..." if len(row["Side_effects"]) > 200 else row["Side_effects"],
-            "Uses": row["Uses"]
+            "Uses": row["Uses"],
+            "Composition": row["Composition"]
+        })
+    return results
+
         })
     return results
 
